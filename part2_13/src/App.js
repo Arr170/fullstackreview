@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import {FindCountries, ShowCountries} from './components/countriesTool'
+import SearchForm from './components/searchForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+const App = () => {
+  const a = 'ars'
+  const [search, setSearch] = useState('')
+  const [countries, setCountries] = useState([])
+  const [foundCountries, setFoundCountries] = useState([])
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('https://restcountries.com/v3.1/all')
+      .then(response => {
+        console.log('promise fulfilled')
+        setCountries(response.data)
+      })
+  }, [])
+  console.log('render', countries.length, 'countries')
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+    console.log('searching for', event.target.value, 'in', countries)
+    setFoundCountries(FindCountries(event.target.value, countries))
+  }
+  
+  return(
+    <div>
+      <SearchForm value = {search} onchange = {handleSearch} />
+      <ShowCountries toShow = {foundCountries}/>
     </div>
-  );
+  )
 }
-
-export default App;
+export default App
