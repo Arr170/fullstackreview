@@ -7,13 +7,8 @@ const ShowOneCountry  = ({toShow, bool}) => {
     {
     return(
         <div>
-            <h2>{toShow.name.official}</h2>
-            <p>capital: {toShow.capital}</p> 
-            <p>area: {toShow.area}</p>
-            <p>languages:</p>
-            {Object.values(toShow.languages).map(lang => <li key = {lang}>{lang} </li>)}
-            <img src = {toShow.flags.png}/>
-            </div>
+            here we go
+        </div>
     )
     }
     else
