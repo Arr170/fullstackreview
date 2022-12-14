@@ -24,11 +24,13 @@ const ShowOneCountry  = ({toShow, bool}) => {
 ///
 const ShowCountries = ({toShow}) => {
     const [showOne, setShowOne] = useState(false)
+    const [mediator, setMediator] = useState()
 
-    const turnShow = (event) => {
+    const turnShow = (medi) => {
         // event.preventDefault()
+        setMediator(medi)
         console.log('button pressed')
-        setShowOne(true)
+        if(showOne){setShowOne(false)}else{setShowOne(true)}
     }
 
     //console.log('to show:', toShow)
@@ -61,8 +63,8 @@ const ShowCountries = ({toShow}) => {
     {
         return(
             <div>
-                {toShow.map(country => <div><p key = {country.name.official}>{country.name.official}      <button onClick = {() =>turnShow()}>show</button></p><ShowOneCountry toShow = {country} bool = {showOne}/></div>)}
-                
+                {toShow.map(country => <div><p key = {country.name.official}>{country.name.official}      <button onClick = {() =>turnShow(country)}>show</button></p></div>)}
+                <ShowOneCountry toShow = {mediator} bool = {showOne}/>
             </div>
         )
     }
