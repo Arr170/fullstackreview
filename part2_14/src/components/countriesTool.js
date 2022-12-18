@@ -1,5 +1,7 @@
+
 import {useState} from 'react'
 import React from 'react'
+import Weather from './weather'
 ///
 const ShowOneCountry  = ({toShow, bool}) => {
     console.log('show one country', toShow, bool)
@@ -13,7 +15,8 @@ const ShowOneCountry  = ({toShow, bool}) => {
             <p>languages:</p>
             {Object.values(toShow.languages).map(lang => <li key = {lang}>{lang} </li>)}
             <img src = {toShow.flags.png}/>
-            </div>
+            <Weather toShow = {toShow}/>
+        </div>
     )
     }
     else
@@ -77,5 +80,7 @@ function FindCountries(toFind, whereLook) {
     console.log('i found:', found)
     return(found)
 }
+
+
 
 export  {FindCountries, ShowCountries}
