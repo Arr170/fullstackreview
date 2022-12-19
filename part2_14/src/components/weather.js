@@ -36,7 +36,7 @@ const Weather =({toShow}) => {
       return(
         <div>
             <h3>Weather in {toShow.capital}</h3>
-            <p>temperature: {(273 - temp).toFixed(1)} °C</p>
+            <p>temperature: {(temp - 273.15).toFixed(1)} °C</p>
             <img src = {icon} alt = 'img'/>
             <p>{description}</p>
             <p>wind {wind} m/s</p>
