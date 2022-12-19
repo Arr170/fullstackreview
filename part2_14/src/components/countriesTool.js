@@ -2,7 +2,9 @@
 import {useState} from 'react'
 import React from 'react'
 import Weather from './weather'
-///
+
+
+///called when only one country is going to be showed
 const ShowOneCountry  = ({toShow, bool}) => {
     console.log('show one country', toShow, bool)
     if(bool)
@@ -24,13 +26,14 @@ const ShowOneCountry  = ({toShow, bool}) => {
         return(<></>)
     }
 }
-///
+
+
+///showing countries, called every time after change in input
 const ShowCountries = ({toShow}) => {
     const [showOne, setShowOne] = useState(false)
     const [mediator, setMediator] = useState()
 
     const turnShow = (medi) => {
-        // event.preventDefault()
         setMediator(medi)
         console.log('button pressed')
         if(showOne){setShowOne(false)}else{setShowOne(true)}
@@ -73,7 +76,9 @@ const ShowCountries = ({toShow}) => {
         )
     }
 }
-///
+
+
+///findes country that matches with input
 function FindCountries(toFind, whereLook) {
     console.log("toFind, whereLook", toFind, whereLook)
     let found

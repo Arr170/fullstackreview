@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 const api_key = process.env.REACT_APP_API_KEY
 
+///calles for every country that is showed, displays weather info 
 const Weather =({toShow}) => {
     console.log('weather to Show', toShow)
     const [weather, setWeather] = useState(null)
