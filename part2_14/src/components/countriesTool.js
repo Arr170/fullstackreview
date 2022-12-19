@@ -50,6 +50,7 @@ const ShowCountries = ({toShow}) => {
             <p>languages:</p>
             {Object.values(toShow[0].languages).map(lang => <li key = {lang}>{lang} </li>)}
             <img src = {toShow[0].flags.png}/>
+            <Weather toShow = {toShow[0]}/>
             </div>
         )
     }
