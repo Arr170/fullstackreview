@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 import isEqual from 'C:\\Users\\arsen\\fullstackopen\\part2.6_10\\node_modules\\lodash\\isEqual.js'
 import Names from './components/Names'
@@ -14,7 +14,13 @@ const App = () => {
   //filter bool
   const [filter, setFilter] = useState(false)
   //storing names arrey
-  const [names, setNames] = useState([]) 
+  const [names, setNames] = useState([])
+  //geting names from server and soring them in names arrey
+  useEffect(() => {
+    serviceContacts
+      .getAll()
+      .then(response => {setNames(response)})
+  }, []) 
   //storing filtred names
   let namesToShow = names
   if(filter){namesToShow = names.filter(name => name.name.includes(find))}
@@ -55,17 +61,19 @@ const handleNewNumber = (event) => {
     const comparingNumber = names.find(element => isEqual(element.number, newNumber))
     console.log('comparingName', comparingName)
     console.log('comparingNumber', comparingNumber)
-    // dublicate name check
+    // dublicate name check and adding new object to "names" arrey and server
     if(comparingName === undefined){
       if(comparingNumber === undefined){
         const toBeAdded = { 
           name: newName,
           number: newNumber,
-          id: names.length + 1,
         }
-        setNames(names.concat(toBeAdded))
-        setNewName('')
-        setNewNumber('')
+        serviceContacts
+          .create(toBeAdded)
+          .then(response => {
+            setNames(names.concat(response))
+            setNewName('')
+            setNewNumber('')})
         }
       else{alert(newNumber + ' is added to different name already!')} //num alert
     }
