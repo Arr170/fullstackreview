@@ -4,7 +4,7 @@ import isEqual from 'C:\\Users\\arsen\\fullstackopen\\part2.6_10\\node_modules\\
 import Names from './components/Names'
 import FilterForm from './components/FilterForm'
 import NameNumForm from './components/Name&NumForm'
-import serviceContacts from './servises/contacts'
+import serviceContacts from './services/contacts'
 
 
 
@@ -79,14 +79,26 @@ const handleNewNumber = (event) => {
     }
     else {alert(newName + " is existing already u dumbass")} //name alert
   }
-
+  //deleting names
+  const deleteName = (name, id) => {
+    console.log('deleteName got', id, name)
+    if(window.confirm('delete '+name+'?')){
+        serviceContacts
+          .remove(id)
+        setTimeout(() => {
+          serviceContacts
+            .getAll()
+            .then(respond => setNames(respond))
+        }, 200)
+    }
+  }
   return (
     <div>
       <h2>Phonebook</h2>
         <FilterForm value = {find} onChange = {handleFindInput}/>
         <NameNumForm nameValue = {newName} nameOnChange = {handleNewName} numValue = {newNumber} numOnChange = {handleNewNumber} onSubmit = {newNameAdd}/> 
       <h2>Numbers</h2>
-      <Names nameArrey = {namesToShow}/>
+      <Names nameArrey = {namesToShow} onDelete = {deleteName}/>
     </div>
   )
 }
