@@ -4,6 +4,7 @@ import isEqual from 'C:\\Users\\arsen\\fullstackopen\\part2.6_10\\node_modules\\
 import Names from './components/Names'
 import FilterForm from './components/FilterForm'
 import NameNumForm from './components/Name&NumForm'
+import serviceContacts from './servises/contacts'
 
 
 
@@ -13,23 +14,7 @@ const App = () => {
   //filter bool
   const [filter, setFilter] = useState(false)
   //storing names arrey
-  const [names, setNames] = useState([
-    { name: 'Arto Hellas',
-      number: '777 777 000',
-      id: 1,
-      
-     },
-     {
-      name: 'arsenij',
-      number: '684654',
-      id: 2,
-     },
-     {
-      name: 'Nikita',
-      number: '6588245',
-      id:3
-     }
-  ]) 
+  const [names, setNames] = useState([]) 
   //storing filtred names
   let namesToShow = names
   if(filter){namesToShow = names.filter(name => name.name.includes(find))}

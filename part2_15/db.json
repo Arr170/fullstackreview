@@ -1,0 +1,19 @@
+{
+"contacts":
+[
+{ 
+"name": "Arto Fellas",
+"number": "777 777 000",
+"id": 1      
+},
+{
+"name": "arsenij",
+"number": "123 123 123",
+"id": 2
+},
+{
+"name": "Nikita",
+"number": "134 124 156",
+"id":3
+}
+]}
