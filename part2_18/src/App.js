@@ -57,13 +57,17 @@ const handleNewNumber = (event) => {
   const newNameAdd = (event) =>{
     event.preventDefault()
     console.log('button clicked', event.target)
-    const comparingName = names.find(element => isEqual(element.name, newName))
-    const comparingNumber = names.find(element => isEqual(element.number, newNumber))
-    console.log('comparingName', comparingName)
-    console.log('comparingNumber', comparingNumber)
-    // dublicate name check and adding new object to "names" arrey and server
-    if(comparingName === undefined){
-      if(comparingNumber === undefined){
+    const comparing = names.find(element => isEqual(element.name, newName))
+    console.log('comparing', comparing)
+    //updating number for name
+    const updateName = (id, toBeUpdated) => {
+      serviceContacts
+        .update(id, toBeUpdated)
+        .then(response => {setNames(names.map(name => name.id !== id ? name : response))})
+    }
+    // dublicate name check, if there is a dublicate, offers a change, if there is no dublicate adding new object to "names" arrey and server
+    if(comparing === undefined){
+
         const toBeAdded = { 
           name: newName,
           number: newNumber,
@@ -75,10 +79,15 @@ const handleNewNumber = (event) => {
             setNewName('')
             setNewNumber('')})
         }
-      else{alert(newNumber + ' is added to different name already!')} //num alert
-    }
-    else {alert(newName + " is existing already u dumbass")} //name alert
-  }
+    else {
+      if(window.confirm(newName + 'is in your contacts already, update number?')){
+      const toBeUpdated ={
+        name: newName,
+        number: newNumber,
+      }
+      updateName(comparing.id, toBeUpdated)
+      } 
+  }}
   //deleting names
   const deleteName = (name, id) => {
     console.log('deleteName got', id, name)
