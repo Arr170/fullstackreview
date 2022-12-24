@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "name": "Nikita",
-      "number": "123123123",
-      "id": 2
-    },
-    {
       "name": "arsenijjj",
       "number": "456",
       "id": 3
@@ -16,9 +11,14 @@
       "id": 4
     },
     {
-      "name": "Hellow Hallow",
-      "number": "789",
-      "id": 5
+      "name": "Nikitaaa",
+      "number": "563",
+      "id": 6
+    },
+    {
+      "name": "wriysg34234",
+      "number": "3423",
+      "id": 7
     }
   ]
 }
