@@ -1,7 +1,8 @@
-POST http://localhost:3001/api/notes/ HTTP/1.1
+POST http://localhost:3002/api/notes/ HTTP/1.1
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "idk"
+    "content": "idk"
 }
+###
+get http://localhost:3002/api/notes
