@@ -6,6 +6,7 @@ import FilterForm from './components/FilterForm'
 import NameNumForm from './components/Name&NumForm'
 import serviceContacts from './services/contacts'
 import './App.css'
+const cors = require('cors')
 
 
 
@@ -22,7 +23,7 @@ const App = () => {
       .getAll()
       .then(response => {setNames(response)})
   }, []) 
-  //constantes for succer or error messages
+  //constantes for succes or error messages
   const [succesMsg, setSuccesMsg] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
   //storing filtred names
@@ -60,6 +61,7 @@ const handleNewNumber = (event) => {
   //printing succes message
   const SuccesMsg = ({message}) => {
     if (message === null){return null}
+    setTimeout(() => setSuccesMsg(null), 5000)
     return(
       <div className = 'messageOK'>
         {message}
@@ -69,6 +71,7 @@ const handleNewNumber = (event) => {
   // printing error message
   const ErrorMsg = ({message}) => {
     if(message === null){return null}
+    setTimeout(() => setErrorMsg(null), 5000)
     return(
       <div className = 'messageError'>
         {message}
@@ -86,6 +89,10 @@ const handleNewNumber = (event) => {
       serviceContacts
         .update(id, toBeUpdated)
         .then(response => {setNames(names.map(name => name.id !== id ? name : response))})
+        .catch(error => {
+          setErrorMsg(error.response.data.error)
+          console.log(error.response.data.error)
+        })
     }
     // dublicate name check, if there is a dublicate, offers a change, if there is no dublicate adding new object to "names" arrey and server
     if(comparing === undefined){
@@ -99,9 +106,14 @@ const handleNewNumber = (event) => {
           .then(response => {
             setNames(names.concat(response))
             setNewName('')
-            setNewNumber('')})
-        setSuccesMsg(newName + 'is added to your contacts')
-        setTimeout(() => setSuccesMsg(null), 5000)
+            setNewNumber('')
+            setSuccesMsg(newName + ' is added to your contacts')})
+          .catch(error => {
+            setErrorMsg(error.response.data.error)
+            console.log(error.response.data.error)
+          })
+         
+        
         }
     else {
       if(window.confirm(newName + ' is in your contacts already, update number?')){
@@ -110,6 +122,7 @@ const handleNewNumber = (event) => {
         number: newNumber,
       }
       updateName(comparing.id, toBeUpdated)
+
       } 
   }}
   //deleting names
@@ -120,7 +133,6 @@ const handleNewNumber = (event) => {
           .remove(id)
           .catch(error => {
             setErrorMsg(name + ' was already removed from your contacts')
-            setTimeout(() => setErrorMsg(null), 5000)
           })
         setTimeout(() => {
           serviceContacts

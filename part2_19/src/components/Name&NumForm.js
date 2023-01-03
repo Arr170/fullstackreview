@@ -7,7 +7,7 @@ const NameNumForm = (props) => {
           name: <input value = {props.nameValue} onChange = {props.nameOnChange}/>
         </div>
         <div>
-          number: <input value ={props.numValue} onChange = {props.numOnChange} type = "number"/>
+          number: <input value ={props.numValue} onChange = {props.numOnChange} />
         </div>
         <div>
           <button type="submit">add</button>
